@@ -1,0 +1,18 @@
+D, [2015-02-26T18:33:03.431448 #11989] DEBUG -- :   [1m[36m (34.7ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL) [0m
+D, [2015-02-26T18:33:03.454619 #11989] DEBUG -- :   [1m[35m (17.7ms)[0m  CREATE UNIQUE INDEX  "unique_schema_migrations" ON "schema_migrations"  ("version")
+D, [2015-02-26T18:33:03.457067 #11989] DEBUG -- :   [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+I, [2015-02-26T18:33:03.462564 #11989]  INFO -- : Migrating to CreateArticles (20150226074041)
+D, [2015-02-26T18:33:03.463713 #11989] DEBUG -- :   [1m[35m (0.3ms)[0m  BEGIN
+D, [2015-02-26T18:33:03.493756 #11989] DEBUG -- :   [1m[36m (29.1ms)[0m  [1mCREATE TABLE "articles" ("id" serial primary key, "title" character varying, "text" text, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-02-26T18:33:03.534163 #11989] DEBUG -- :   [1m[35mSQL (0.5ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150226074041"]]
+D, [2015-02-26T18:33:03.536718 #11989] DEBUG -- :   [1m[36m (2.2ms)[0m  [1mCOMMIT[0m
+I, [2015-02-26T18:33:03.536806 #11989]  INFO -- : Migrating to CreateComments (20150226094042)
+D, [2015-02-26T18:33:03.537711 #11989] DEBUG -- :   [1m[35m (0.2ms)[0m  BEGIN
+D, [2015-02-26T18:33:03.567231 #11989] DEBUG -- :   [1m[36m (28.7ms)[0m  [1mCREATE TABLE "comments" ("id" serial primary key, "commenter" character varying, "body" text, "article_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) [0m
+D, [2015-02-26T18:33:03.573455 #11989] DEBUG -- :   [1m[35m (3.8ms)[0m  CREATE  INDEX  "index_comments_on_article_id" ON "comments"  ("article_id")
+D, [2015-02-26T18:33:03.576270 #11989] DEBUG -- :   [1m[36m (2.1ms)[0m  [1mALTER TABLE "comments" ADD CONSTRAINT "fk_rails_8fa3e34760"
+FOREIGN KEY ("article_id")
+  REFERENCES "articles" ("id")
+[0m
+D, [2015-02-26T18:33:03.579185 #11989] DEBUG -- :   [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES ($1)  [["version", "20150226094042"]]
+D, [2015-02-26T18:33:03.589395 #11989] DEBUG -- :   [1m[36m (9.8ms)[0m  [1mCOMMIT[0m
